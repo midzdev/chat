@@ -13,53 +13,45 @@ body {
   background: rgb(20, 20, 20);
 }
 
-#message {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 8px 20px;
-  width: 100vw;
-  border-top: 1px solid rgb(30, 30, 30);
+li {
+  padding: 6px 12px;
 }
 
-#message h1 {
+li h1 {
   color: white;
-  font: 600 18px "Poppins";
+  font: 600 16px "Poppins";
 }
 
-#message p {
-  color: white;
-  font: 400 16px "Poppins";
+li p {
+  color: rgb(185, 185, 185);
+  font: 400 14px "Poppins";
 }
 
-.Chat ul {
+.chat ul {
+  position: fixed;
+  bottom: 60px;
+}
+
+.chat form {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  height: 100vh;
-  padding-bottom: 60px;
-}
-
-.Chat form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: fixed;
   bottom: 0;
   width: 100vw;
 }
 
-.Chat input {
+.chat input {
   background: rgb(30, 30, 30);
-  font: 600 16px "Poppins";
+  font: 400 14px "Poppins";
   color: white;
   padding: 12px;
   width: 100%;
 }
 
-.Chat button {
-  font: 600 16px "Poppins";
-  padding: 12px 24px;
+.chat button {
+  font: 600 14px "Poppins";
+  padding: 0 26px;
+  cursor: pointer;
+  background: white;
 }
 
 .login {
@@ -76,4 +68,6 @@ body {
   cursor: pointer;
   font: 600 16px "Poppins";
   padding: 12px 24px;
+  background: white;
+  margin: 6px 0;
 }
