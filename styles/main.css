@@ -18,32 +18,62 @@ body {
   flex-direction: column;
   justify-content: center;
   padding: 8px 20px;
-  border-radius: 14px;
-  background: rgb(25, 25, 25);
-  margin: 8px auto;
-  width: 98vw;
+  width: 100vw;
+  border-top: 1px solid rgb(30, 30, 30);
 }
 
-h1 {
+#message h1 {
   color: white;
   font: 600 18px "Poppins";
 }
 
-p {
+#message p {
   color: white;
   font: 400 16px "Poppins";
 }
 
-input {
-  background: rgb(30, 30, 30);
-  font: 600 20px "Poppins";
-  color: white;
-  padding: 14px;
-  margin: 12px;
-  width: 94vw;
+.Chat ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100vh;
+  padding-bottom: 60px;
 }
 
-button {
+.Chat form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+}
+
+.Chat input {
+  background: rgb(30, 30, 30);
   font: 600 16px "Poppins";
-  padding: 14px;
+  color: white;
+  padding: 12px;
+  width: 100%;
+}
+
+.Chat button {
+  font: 600 16px "Poppins";
+  padding: 12px 24px;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  height: 100vh;
+}
+
+#continue-with-google {
+  border-radius: 12px;
+  cursor: pointer;
+  font: 600 16px "Poppins";
+  padding: 12px 24px;
 }

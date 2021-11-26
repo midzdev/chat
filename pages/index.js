@@ -3,6 +3,10 @@ import {
   collection,
   onSnapshot,
   addDoc,
+  serverTimestamp,
+  query,
+  orderBy,
+  limit,
 } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { useEffect, useState } from "react";
@@ -25,54 +29,64 @@ function Chat() {
   const [data, setData] = useState([]);
   const [message, setMessage] = useState("");
 
-  useEffect(() => {
-    onSnapshot(collection(db, "messages"), (snapshot) => {
-      const data = snapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
+  useEffect(async () => {
+    await onSnapshot(
+      query(collection(db, "Chat"), orderBy("createdAt")),
+      (snapshot) => {
+        const data = snapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
 
-      setData(data);
-    });
+        setData(data);
+      }
+    );
   }, []);
 
   async function sendMessage(e) {
     e.preventDefault();
 
-    await addDoc(collection(db, "messages"), {
+    if (message == "") return;
+
+    await addDoc(collection(db, "Chat"), {
       name: auth.currentUser.displayName,
       message: message,
+      createdAt: serverTimestamp(),
     });
+
+    setMessage("");
   }
 
   return (
-    <>
-      <main>
+    <main className="Chat">
+      <ul>
         {data.map((msg) => {
           return (
-            <div id="message" key={msg.id}>
+            <li id="message" key={msg.id}>
               <h1>{msg.name}</h1>
               <p>{msg.message}</p>
-            </div>
+            </li>
           );
         })}
-      </main>
+      </ul>
 
       <form onSubmit={sendMessage}>
         <input
           value={message}
           onChange={(msg) => setMessage(msg.target.value)}
+          placeholder="Message"
         ></input>
         <button type="submit">Send</button>
       </form>
-    </>
+    </main>
   );
 }
 
 function LogIn() {
   return (
-    <>
+    <main className="login">
       <button
+        id="continue-with-google"
         onClick={() =>
           signInWithPopup(auth, new GoogleAuthProvider()).then((result) => {
             const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -81,9 +95,9 @@ function LogIn() {
           })
         }
       >
-        eeeeeeeee
-      </button>{" "}
-    </>
+        Continue with Google
+      </button>
+    </main>
   );
 }
 
