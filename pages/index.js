@@ -1,8 +1,7 @@
 import Head from "next/head";
 import { initializeApp } from "firebase/app";
-import { useEffect, useRef, useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
+import { useEffect, useState } from "react";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, collection, onSnapshot, addDoc, serverTimestamp, query, orderBy } from "firebase/firestore";
 
 initializeApp({
@@ -11,39 +10,36 @@ initializeApp({
   projectId: "techquid-web",
   storageBucket: "techquid-web.appspot.com",
   messagingSenderId: "596423863198",
-  appId: "1:596423863198:web:be36a8ca54b0145db3448f",
+  appId: "1:596423863198:web:be36a8ca54b0145db3448f"
 });
 
 const db = getFirestore();
 
 function Chat() {
-  const [data, setData] = useState([]);
-  const [message, setMessage] = useState("");
-
-  const dummy = useRef();
+  const [messages, setMessages] = useState([]);
+  const [input, setInput] = useState("");
   
-  useEffect(() => onSnapshot(query(collection(db, "Chat"), orderBy("createdAt")), (snapshot) => setData(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))), []);
+  useEffect(() => onSnapshot(query(collection(db, "Chat"), orderBy("createdAt")), (data) => setMessages(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))), []);
 
   async function send(e) {
     e.preventDefault();
 
-    if (message === "") { return }
-    else if (message === "/signout") { signOut(getAuth()) } 
-    else {
-      await addDoc(collection(db, "Chat"), { name: getAuth().currentUser.providerData[0].displayName, message: message, createdAt: serverTimestamp() });
-      setMessage("");
-      dummy.current.scrollIntoView({ behavior: "smooth" });
+    switch (input) {
+      case "/signout":
+        signOut(getAuth());
+        break;
+      case "":
+        return;
+      default:
+        await addDoc(collection(db, "Chat"), { name: getAuth().currentUser.providerData[0].displayName, message: input, createdAt: serverTimestamp() });
+        setInput("");
     }
   }
 
   return (
-    <main className="chat">
-      <Head>
-        <title>Chat</title>
-      </Head>
-
+    <div className="chat">
       <ul>
-        {data.map((info) => {
+        {messages.map((info) => {
           return (
             <li key={info.id}>
               <h1>{info.name}</h1>
@@ -51,31 +47,35 @@ function Chat() {
             </li>
           );
         })}
-        <div ref={dummy}></div>
       </ul>
 
       <form onSubmit={send}>
-        <input value={message} onChange={(value) => setMessage(value.target.value)} placeholder="Message"></input>
+        <input value={input} onChange={(input) => setInput(input.target.value)} placeholder="Message"></input>
         <button type="submit">Send</button>
       </form>
-    </main>
+    </div>
   );
 }
 
 function LogIn() {
   return (
-    <main className="login">
-      <Head>
-        <title>Log In</title>
-      </Head>
+    <div className="login">
       <button id="continue-with-google" onClick={() => signInWithPopup(getAuth(), new GoogleAuthProvider())}>
         Continue with Google
       </button>
-    </main>
+    </div>
   );
 }
 
 export default function App() {
-  const [user, loading, error] = useAuthState(getAuth());
-  return user ? <Chat /> : <LogIn />;
+  const [user, setUser] = useState([]);
+  onAuthStateChanged(getAuth(), (user) => user ? setUser(user) : setUser(null))
+  return (
+    <>
+      <Head>
+        <title>TQ Chat</title>
+      </Head>
+      {user ? <Chat /> : <LogIn />}
+    </>
+  ) 
 }
