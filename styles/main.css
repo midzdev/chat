@@ -14,7 +14,15 @@ body {
 }
 
 li {
-  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+  list-style: none;
+}
+
+li img {
+  margin: 0 12px;
+  border-radius: 16px;
 }
 
 li h1 {
@@ -27,19 +35,18 @@ li p {
   font: 400 14px "Poppins";
 }
 
-.chat ul {
-  position: fixed;
-  bottom: 60px;
+ul {
+  margin-bottom: 50px;
 }
 
-.chat form {
+form {
   display: flex;
   position: fixed;
   bottom: 0;
   width: 100vw;
 }
 
-.chat input {
+input {
   background: rgb(30, 30, 30);
   font: 400 14px "Poppins";
   color: white;
@@ -47,9 +54,9 @@ li p {
   width: 100%;
 }
 
-.chat button {
+button {
   font: 600 14px "Poppins";
-  padding: 0 26px;
+  padding: 0 22px;
   cursor: pointer;
   background: white;
 }
