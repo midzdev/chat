@@ -54,7 +54,7 @@ li p {
   background: white;
 }
 
-.login {
+.signin {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -63,11 +63,16 @@ li p {
   height: 100vh;
 }
 
-#continue-with-google {
+.signin button{
   border-radius: 12px;
   cursor: pointer;
   font: 600 16px "Poppins";
   padding: 12px 24px;
   background: white;
   margin: 6px 0;
+  transition: .4s;
+}
+
+.signin button:hover {
+  background: rgb(55, 255, 155);
 }
