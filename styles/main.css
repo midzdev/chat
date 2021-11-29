@@ -9,20 +9,28 @@
   border: none;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   background: rgb(20, 20, 20);
 }
 
+ul {
+  position: fixed;
+  bottom: 50px;
+}
+
 li {
-  display: flex;
-  align-items: center;
-  padding: 12px 0;
-  list-style: none;
+  margin: 12px;
 }
 
 li img {
-  margin: 0 12px;
-  border-radius: 16px;
+  margin: 0 8px 0 10px;
+  border-radius: 100%;
+  height: 36px;
+  width: 36px;
 }
 
 li h1 {
@@ -31,12 +39,8 @@ li h1 {
 }
 
 li p {
-  color: rgb(185, 185, 185);
+  color: rgb(155, 155, 155);
   font: 400 14px "Poppins";
-}
-
-ul {
-  margin-bottom: 50px;
 }
 
 form {
@@ -47,11 +51,12 @@ form {
 }
 
 input {
-  background: rgb(30, 30, 30);
   font: 400 14px "Poppins";
-  color: white;
+  background: rgb(20, 20, 20);
   padding: 12px;
   width: 100%;
+  border-top: 1px solid rgb(30, 30, 30);
+  color: white;
 }
 
 button {
