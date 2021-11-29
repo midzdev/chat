@@ -17,7 +17,7 @@ function SignIn() {
   const [name, setName] = useState("");
 
   return (
-    <form onSubmit={() => document.cookie = "name=" + name}>
+    <form onSubmit={() => document.cookie = `name=${name}; max-age=31536000; secure;`}>
       <input value={name} onChange={(name) => setName(name.target.value)} placeholder="Enter your name..."/>
     </form>
   )
