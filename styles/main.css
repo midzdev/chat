@@ -18,8 +18,8 @@ body {
 }
 
 ul {
-  position: fixed;
-  bottom: 50px;
+  overflow: auto;
+  height: 95vh;
 }
 
 li {
@@ -45,7 +45,6 @@ li p {
 
 form {
   display: flex;
-  position: fixed;
   bottom: 0;
   width: 100vw;
 }

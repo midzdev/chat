@@ -5,11 +5,7 @@ const supabase = createClient("https://ukkudmxrtbwpjltpzlgj.supabase.co", "eyJhb
 
 export default function App() {
   const [name, setName] = useState()
-
-  useEffect(() => {
-    setName(document.cookie.replace("name=", ""))
-  })
-  
+  useEffect(() => setName(document.cookie.replace("name=", "")));
   return name ? <Main/> : <SignIn/>
 }
 
@@ -17,7 +13,10 @@ function SignIn() {
   const [name, setName] = useState("");
 
   return (
-    <form onSubmit={() => document.cookie = `name=${name}; max-age=31536000; secure;`}>
+    <form onSubmit={() => {
+      if (!name) return;
+      document.cookie = `name=${name}; max-age=31536000; secure;`
+      }}>
       <input value={name} onChange={(name) => setName(name.target.value)} placeholder="Enter your name..."/>
     </form>
   )
@@ -26,18 +25,12 @@ function SignIn() {
 function Main() {
   const [messages, setMessages] = useState([])
   const [input, setInput] = useState("")
+  const dummy = useRef()
 
-  useEffect(async () => {
-    const { data } = await supabase.from("messages").select()
-    setMessages(data)
-
-    const messagesListener = supabase.from("messages").on("*", () => console.log(data)).subscribe()
-    messagesListener.unsubscribe()
-  })
-
-  async function handleSend(e) {
+  
+  async function handleSubmit(e) {
     e.preventDefault()
-
+    
     switch (input) {
       case "":
         return;
@@ -46,9 +39,26 @@ function Main() {
         return;
       default:
         await supabase.from("messages").insert([{ name: document.cookie.replace("name=", ""), message: input }])
-        setInput("")
+      }
+      setInput("")
     }
-  }
+    
+    
+    useEffect(async () => {
+      const { data } = await supabase.from("messages").select()
+      setMessages(data)
+      dummy.current.scrollIntoView()
+    }, [])
+
+    useEffect(async () => {
+      supabase.from("messages").on("*", async () => {
+        const { data } = await supabase.from("messages").select()
+        setMessages(data)
+        dummy.current.scrollIntoView()
+      }).subscribe()
+    })
+
+
 
   return (
     <main className="chat">
@@ -61,9 +71,11 @@ function Main() {
             </li>
           )
         })}
+
+        <div ref={dummy}></div>
       </ul>
 
-      <form onSubmit={handleSend}>
+      <form onSubmit={handleSubmit}>
         <input value={input} onChange={(value) => setInput(value.target.value)} placeholder="Message"/>
       </form>
     </main>
