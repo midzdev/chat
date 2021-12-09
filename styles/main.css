@@ -23,19 +23,18 @@ ul {
 }
 
 li {
-  margin: 12px;
-}
-
-li img {
-  margin: 0 8px 0 10px;
-  border-radius: 100%;
-  height: 36px;
-  width: 36px;
+  padding: 12px;
 }
 
 li h1 {
   color: white;
   font: 600 16px "Poppins";
+}
+
+li h1 span {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgb(155, 155, 155);
 }
 
 li p {
@@ -50,12 +49,19 @@ form {
 }
 
 input {
+  position: fixed;
+  bottom: 0;
+
   font: 400 14px "Poppins";
   background: rgb(20, 20, 20);
   padding: 12px;
   width: 100%;
-  border-top: 1px solid rgb(30, 30, 30);
+  border-top: 1px solid rgb(35, 35, 35);
   color: white;
+}
+
+input:focus {
+  border-color: rgb(55, 255, 155);
 }
 
 button {
@@ -63,27 +69,4 @@ button {
   padding: 0 22px;
   cursor: pointer;
   background: white;
-}
-
-.signin {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  height: 100vh;
-}
-
-.signin button{
-  border-radius: 12px;
-  cursor: pointer;
-  font: 600 16px "Poppins";
-  padding: 12px 24px;
-  background: white;
-  margin: 6px 0;
-  transition: .4s;
-}
-
-.signin button:hover {
-  background: rgb(55, 255, 155);
 }
