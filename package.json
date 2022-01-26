@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "main": "next ."
+    "start": "next dev"
   },
   "dependencies": {
     "@supabase/supabase-js": "^1.28.2",
