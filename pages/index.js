@@ -45,7 +45,7 @@ function Chat() {
       case "": return;
       case "/signout":
         await supabase.auth.signOut();
-        window.location.reload();
+        location.reload();
         break;
       default:
         await supabase.from("messages").insert([{ profile_picture: user.user_metadata.avatar_url, text: input}])
