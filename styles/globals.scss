@@ -67,13 +67,23 @@ main {
   justify-content: center;
   height: 100vh;
   a {
-    color: black;
-    background: white;
-    border: none;
-    padding: 14px 24px;
-    font: 400 14px "Inter";
+    color: white;
+    background: none;
+    border: 1px solid white;
+    padding: 10px 20px;
+    font: 600 14px "Inter";
     cursor: pointer;
-    margin: 4px 0;
-    border-radius: 999px;
+    margin: 8px 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 0 white;
+    transition: box-shadow 0.2s;
+
+    &:hover {
+      box-shadow: 0 2px 0;
+    }
+
+    &:active {
+      box-shadow: 0 0 0;
+    }
   }
 }

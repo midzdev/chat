@@ -14,6 +14,7 @@ export default function App() {
 function LogIn() {
   return (
     <main>
+      <a onClick={async() => await supabase.auth.signIn({ provider: "discord" })}>Continue with Discord</a>
       <a onClick={async() => await supabase.auth.signIn({ provider: "github" })}>Continue with GitHub</a>
       <a onClick={async() => await supabase.auth.signIn({ provider: "twitter" })}>Continue with Twitter</a>
     </main>
