@@ -34,11 +34,16 @@ li p {
   border-radius: 999px;
 }
 
-li img {
+li img:first-child {
   width: 44px;
   height: 44px;
   border-radius: 999px;
   margin-right: 8px;
+}
+
+li img:last-child {
+  width: 200px;
+  border-radius: 14px;
 }
 
 form {
@@ -47,11 +52,22 @@ form {
   display: flex;
   position: fixed;
   bottom: 0;
+  height: 75px;
   width: 100vw;
 }
 
+form button {
+  margin: 14px 0 14px 14px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1px solid #323232;
+  background: rgba(20, 20, 20, 0.5);
+  -webkit-backdrop-filter: blur(4px);
+          backdrop-filter: blur(4px);
+  color: white;
+}
+
 form input {
-  height: 44px;
   padding: 0 18px;
   border-radius: 999px;
   font: 400 14px "Inter";
@@ -111,5 +127,83 @@ main a:hover {
 main a:active {
   -webkit-box-shadow: 0 0 0;
           box-shadow: 0 0 0;
+}
+
+.more {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: fixed;
+  left: 14px;
+  bottom: 75px;
+  border: 1px solid #323232;
+  background: rgba(20, 20, 20, 0.5);
+  -webkit-backdrop-filter: blur(4px);
+          backdrop-filter: blur(4px);
+  border-radius: 14px;
+}
+
+.more .buttons {
+  display: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 400px;
+  margin: 8px;
+}
+
+.more .buttons.active {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.more .gifsMenu {
+  display: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 400px;
+  width: 200px;
+  margin: 8px;
+  overflow-y: auto;
+  border-radius: 8px;
+}
+
+.more .gifsMenu.active {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.more .gifsMenu img {
+  border-radius: 14px;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.more button {
+  background: rgba(20, 20, 20, 0.5);
+  color: white;
+  padding: 14px;
+  background: #1e1e1e;
+  border: none;
+  border-radius: 8px;
+  text-align: left;
+  font: 400 12px "Inter";
+  -webkit-transition: border 0.2s;
+  transition: border 0.2s;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.more button svg {
+  margin-right: 8px;
+}
+
+.more button:hover {
+  border-color: #9b9b9b;
 }
 /*# sourceMappingURL=globals.css.map */
